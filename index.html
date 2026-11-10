@@ -12,7 +12,7 @@
     <div class="container">
         <h1>📊 Gestore Distribuzione</h1>
         
-        <!-- SEZIONE INPUT INIZIALI (Impostati su g e 7.00€) -->
+        <!-- SEZIONE INPUT INIZIALI -->
         <div class="sezione-carico">
             <div class="input-group">
                 <label>Quantità Iniziale:</label>
@@ -39,7 +39,7 @@
             
             <!-- Cliente 1 -->
             <div class="cliente-card">
-                <input type="text" class="input-nome-cliente" value="Cliente 1" placeholder="Nome cliente">
+                <input type="text" id="nome-c1" class="input-nome-cliente" value="Cliente 1" placeholder="Nome cliente">
                 <div class="controlli">
                     <button onclick="cambiaQuantita('cliente1', -1)">-</button>
                     <span id="qta-cliente1" class="quantita">0</span> <span class="label-unita">g</span>
@@ -50,7 +50,7 @@
 
             <!-- Cliente 2 -->
             <div class="cliente-card">
-                <input type="text" class="input-nome-cliente" value="Cliente 2" placeholder="Nome cliente">
+                <input type="text" id="nome-c2" class="input-nome-cliente" value="Cliente 2" placeholder="Nome cliente">
                 <div class="controlli">
                     <button onclick="cambiaQuantita('cliente2', -1)">-</button>
                     <span id="qta-cliente2" class="quantita">0</span> <span class="label-unita">g</span>
@@ -61,7 +61,7 @@
 
             <!-- Cliente 3 -->
             <div class="cliente-card">
-                <input type="text" class="input-nome-cliente" value="Cliente 3" placeholder="Nome cliente">
+                <input type="text" id="nome-c3" class="input-nome-cliente" value="Cliente 3" placeholder="Nome cliente">
                 <div class="controlli">
                     <button onclick="cambiaQuantita('cliente3', -1)">-</button>
                     <span id="qta-cliente3" class="quantita">0</span> <span class="label-unita">g</span>
@@ -84,6 +84,9 @@
                 <div class="totale-pagare-personale">Uso proprio</div>
             </div>
         </div>
+
+        <!-- PULSANTE AZZERA TUTTO -->
+        <button id="btn-azzera" onclick="azzeraTutto()">🗑️ Azzera Tutti i Dati</button>
     </div>
 
     <script src="script.js"></script>
