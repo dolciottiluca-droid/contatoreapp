@@ -1,45 +1,95 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background-color: #f4f7f6;
+    background-color: #121212;
     margin: 0;
-    padding: 15px;
-    color: #333;
+    padding: 12px;
+    color: #e0e0e0;
+    overflow-x: hidden;
 }
 
 .container {
     max-width: 500px;
     margin: 0 auto;
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    background: #1e1e1e;
+    padding: 16px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    border: 1px solid #2c2c2c;
 }
 
 h1 {
     text-align: center;
-    font-size: 24px;
-    color: #2c3e50;
-    margin-top: 0;
+    font-size: 21px;
+    color: #ffffff;
+    margin: 0 0 15px 0;
 }
 
 h3 {
-    border-bottom: 2px solid #ecf0f1;
-    padding-bottom: 8px;
-    color: #34495e;
-    margin-top: 25px;
+    color: #cccccc;
+    margin: 0;
+    font-size: 16px;
 }
 
-/* Griglia per i tre moduli di inserimento in alto */
+/* Barra delle Schede (Tabs) */
+.tabs-nav {
+    display: flex;
+    background-color: #121212;
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 18px;
+    gap: 5px;
+    border: 1px solid #2c2c2c;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 13px;
+    color: #888888;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tab-btn.active {
+    background-color: #2c2c2c;
+    color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.scheda-contenuto {
+    display: none;
+}
+
+.scheda-contenuto.active {
+    display: block;
+    animation: fadeIn 0.25s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Griglia Input */
 .sezione-carico {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.sezione-carico.verticale {
+    flex-direction: column;
+    gap: 15px;
 }
 
 .input-group {
     flex: 1;
-    min-width: 120px;
+    min-width: 105px;
     display: flex;
     flex-direction: column;
 }
@@ -47,64 +97,138 @@ h3 {
 .input-group label {
     font-size: 11px;
     font-weight: bold;
-    margin-bottom: 5px;
-    color: #7f8c8d;
+    margin-bottom: 4px;
+    color: #9e9e9e;
     white-space: nowrap;
 }
 
 .input-group input {
     padding: 10px;
     font-size: 15px;
-    border: 1px solid #bdc3c7;
+    background-color: #262626;
+    color: #ffffff;
+    border: 1px solid #3a3a3a;
     border-radius: 8px;
     text-align: center;
     width: 100%;
     box-sizing: border-box;
 }
 
-/* Box azzurro dei rimasti */
+.input-group input:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* Box Rimanenza */
 .display-rimanenza {
-    background-color: #e8f4fd;
+    background-color: #162936;
     border-left: 5px solid #3498db;
     padding: 10px;
     border-radius: 8px;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .display-rimanenza h2 {
     margin: 0;
-    font-size: 20px;
-    color: #2c3e50;
+    font-size: 19px;
+    color: #e0e0e0;
 }
 
 #quantita-rimasta {
     font-weight: bold;
-    color: #2980b9;
+    color: #5dade2;
 }
 
-/* Schede dei clienti e del consumo personale */
+/* Intestazione Clienti e Pulsante Aggiungi */
+.header-clienti {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #2c2c2c;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+}
+
+.btn-aggiungi-cliente {
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-aggiungi-cliente:active {
+    background-color: #1f618d;
+}
+
+/* Contenitore Scorrevole (Altezza calibrata per mostrare 3 clienti) */
+.lista-clienti-scroll {
+    max-height: 215px;
+    overflow-y: auto;
+    padding-right: 4px;
+    margin-bottom: 15px;
+}
+
+/* Barra di scorrimento sottile per tema scuro */
+.lista-clienti-scroll::-webkit-scrollbar {
+    width: 5px;
+}
+.lista-clienti-scroll::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 4px;
+}
+.lista-clienti-scroll::-webkit-scrollbar-thumb {
+    background: #444444;
+    border-radius: 4px;
+}
+
+/* Schede Clienti */
 .cliente-card {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #fdfdfd;
-    padding: 12px 15px;
-    border: 1px solid #eaeaea;
+    background: #252525;
+    padding: 10px 8px;
+    border: 1px solid #333333;
     border-radius: 10px;
-    margin-bottom: 10px;
-    gap: 10px;
+    margin-bottom: 8px;
+    gap: 5px;
+}
+
+.nome-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 92px;
+}
+
+.btn-elimina-cliente {
+    background: transparent;
+    border: none;
+    color: #777777;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 2px 4px;
+    cursor: pointer;
+}
+
+.btn-elimina-cliente:active {
+    color: #e74c3c;
 }
 
 .input-nome-cliente {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     border: none;
-    border-bottom: 1px dashed #bdc3c7;
+    border-bottom: 1px dashed #555555;
     background: transparent;
-    padding: 4px;
-    width: 110px;
-    color: #2c3e50;
+    padding: 4px 2px;
+    width: 72px;
+    color: #ffffff;
 }
 
 .input-nome-cliente:focus {
@@ -112,81 +236,135 @@ h3 {
     border-bottom: 1px solid #3498db;
 }
 
+/* Consumo Personale */
+.sezione-personale h3 {
+    border-bottom: 1px solid #2c2c2c;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+}
+
 .cliente-card.personale {
-    background-color: #fcf8e3;
-    border-left: 5px solid #f39c12;
+    background-color: #2b2416;
+    border: 1px solid #4a3b1c;
+    border-left: 4px solid #f39c12;
 }
 
 .nome-cliente {
     font-weight: 600;
-    font-size: 16px;
-    width: 110px;
+    font-size: 14px;
+    width: 92px;
+    color: #f5b041;
+    padding-left: 4px;
 }
 
-/* Pulsanti Più e Meno grandi per il touch dello schermo */
+/* Pulsanti + e - */
 .controlli {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .controlli button {
-    width: 42px;
-    height: 42px;
-    font-size: 22px;
+    width: 34px;
+    height: 34px;
+    font-size: 19px;
     font-weight: bold;
-    background-color: #34495e;
-    color: white;
-    border: none;
+    background-color: #383838;
+    color: #ffffff;
+    border: 1px solid #4d4d4d;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0;
 }
 
 .controlli button:active {
-    background-color: #1a252f;
+    background-color: #555555;
 }
 
-.quantita {
-    font-size: 18px;
-    font-weight: bold;
-    min-width: 25px;
-    text-align: center;
-}
-
-/* Scritte dei totali in euro */
-.totale-pagare {
+.qta-box {
     font-size: 14px;
     font-weight: bold;
-    color: #27ae60;
-    text-align: right;
-    min-width: 80px;
+    min-width: 34px;
+    text-align: center;
+    color: #ffffff;
 }
 
-.totale-pagare-personale {
+/* Riquadro Totale (Badge scuro elegante) */
+.tot-badge {
+    background-color: #182c25;
+    border: 1px solid #27ae60;
+    color: #2ecc71;
     font-size: 13px;
-    font-style: italic;
-    color: #e67e22;
-    text-align: right;
-    min-width: 80px;
+    font-weight: bold;
+    padding: 6px 6px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 74px;
+    white-space: nowrap;
 }
 
-/* Il nuovo pulsante rosso in fondo per azzerare tutto */
-#btn-azzera {
+.tot-badge.personale-badge {
+    background-color: #332918;
+    border-color: #d68910;
+    color: #f5b041;
+    font-weight: normal;
+    font-style: italic;
+    font-size: 12px;
+}
+
+/* Stili Scheda 2 (Fornitore) */
+.sottotitolo-privato {
+    font-size: 12px;
+    color: #888888;
+    margin-top: 4px;
+    margin-bottom: 15px;
+}
+
+.display-fornitore {
+    background-color: #281b30;
+    border-left: 5px solid #9b59b6;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.display-fornitore span {
+    font-size: 13px;
+    color: #d2b4de;
+    font-weight: bold;
+}
+
+.display-fornitore h2 {
+    margin: 6px 0 0 0;
+    font-size: 26px;
+    color: #ffffff;
+}
+
+/* Pulsanti Azzera */
+#btn-azzera, #btn-azzera-acq {
     width: 100%;
     padding: 12px;
-    background-color: #e74c3c;
+    background-color: #c0392b;
     color: white;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
     border: none;
     border-radius: 8px;
-    margin-top: 25px;
+    margin-top: 10px;
     cursor: pointer;
 }
 
-#btn-azzera:active {
-    background-color: #c0392b;
+#btn-azzera:active, #btn-azzera-acq:active {
+    background-color: #922b21;
+}
+
+.suggerimento-swipe {
+    text-align: center;
+    font-size: 11px;
+    color: #666666;
+    margin: 15px 0 0 0;
 }

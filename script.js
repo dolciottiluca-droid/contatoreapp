@@ -1,4 +1,4 @@
-// Struttura iniziale predefinita dei dati
+ Struttura iniziale predefinita dei dati
 const datiPredefiniti = {
     cliente1: 0,
     cliente2: 0,
