@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestore Distribuzione Universale</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=5">
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
@@ -42,16 +42,15 @@
                 <h2>Rimasti: <span id="quantita-rimasta">20</span> <span class="label-unita">g</span></h2>
             </div>
 
-            <!-- INTESTAZIONE CLIENTI CON TASTO AGGIUNGI -->
-            <div class="header-clienti">
-                <h3>Consegne Clienti</h3>
-                <button class="btn-aggiungi-cliente" onclick="aggiungiCliente()">+ Aggiungi</button>
+            <h3>Consegne Clienti</h3>
+
+            <!-- CONTENITORE SCORREVOLE CON I 3 CLIENTI INIZIALI -->
+            <div id="lista-clienti-scroll" class="lista-clienti-scroll">
+                <!-- I 3 clienti vengono creati qui dal codice JavaScript -->
             </div>
 
-            <!-- CONTENITORE SCORREVOLE (Mostra circa 3 clienti alla volta) -->
-            <div id="lista-clienti-scroll" class="lista-clienti-scroll">
-                <!-- I clienti vengono generati qui dal codice JavaScript -->
-            </div>
+            <!-- TASTO AGGIUNGI POSIZIONATO SOTTO I CLIENTI -->
+            <button class="btn-aggiungi-sotto" onclick="aggiungiCliente()">+ Aggiungi Cliente</button>
 
             <!-- SEZIONE CONSUMO PERSONALE -->
             <div class="sezione-personale">
@@ -99,6 +98,6 @@
         <p class="suggerimento-swipe">👈 Scorri lateralmente per cambiare scheda 👉</p>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=5"></script>
 </body>
 </html>
