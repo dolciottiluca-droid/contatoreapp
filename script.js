@@ -1,8 +1,8 @@
 const datiPredefiniti = {
     clienti: [
-        { id: 1, nome: 'Cliente 1', qta: 0 },
-        { id: 2, nome: 'Cliente 2', qta: 0 },
-        { id: 3, nome: 'Cliente 3', qta: 0 }
+        { id: 1, nome: '', qta: 0 },
+        { id: 2, nome: '', qta: 0 },
+        { id: 3, nome: '', qta: 0 }
     ],
     personale: 0,
     quantitaTotale: 20,
@@ -14,7 +14,7 @@ const datiPredefiniti = {
 
 function caricaDati() {
     try {
-        let datiSalvati = localStorage.getItem('GDU_NuoviDati_V7');
+        let datiSalvati = localStorage.getItem('GDU_NuoviDati_V8');
         if (datiSalvati) {
             let parsed = JSON.parse(datiSalvati);
             if (parsed && Array.isArray(parsed.clienti) && parsed.clienti.length > 0) {
@@ -31,7 +31,7 @@ let datiApp = caricaDati();
 
 function salvaNelTelefono() {
     try {
-        localStorage.setItem('GDU_NuoviDati_V7', JSON.stringify(datiApp));
+        localStorage.setItem('GDU_NuoviDati_V8', JSON.stringify(datiApp));
     } catch (e) {
         console.error(e);
     }
@@ -82,10 +82,9 @@ function gestisciSwipe() {
 
 function aggiungiCliente() {
     const nuovoId = Date.now();
-    const numeroCliente = datiApp.clienti.length + 1;
     datiApp.clienti.push({
         id: nuovoId,
-        nome: 'Cliente ' + numeroCliente,
+        nome: '',
         qta: 0
     });
     salvaNelTelefono();
@@ -167,7 +166,7 @@ function aggiornaInterfaccia() {
             card.innerHTML = 
                 '<div class="nome-wrapper">' +
                     '<button class="btn-elimina-cliente" onclick="rimuoviCliente(' + cliente.id + ')" title="Rimuovi">✕</button>' +
-                    '<input type="text" class="input-nome-cliente" value="' + cliente.nome + '" oninput="cambiaNomeCliente(' + cliente.id + ', this.value)" placeholder="Nome">' +
+                    '<input type="text" class="input-nome-cliente" value="' + cliente.nome + '" oninput="cambiaNomeCliente(' + cliente.id + ', this.value)" placeholder="👤 Nome...">' +
                 '</div>' +
                 '<div class="controlli">' +
                     '<button onclick="cambiaQuantitaCliente(' + cliente.id + ', -1)">-</button>' +
@@ -231,7 +230,9 @@ document.getElementById('unita-misura').addEventListener('input', function(e) {
 });
 
 document.getElementById('acq-quantita').addEventListener('input', function(e) {
-    datiApp.acqQuantita = parseFloat(e.target.value) || 0;
+    let nuovaQta = parseFloat(e.target.value) || 0;
+    datiApp.acqQuantita = nuovaQta;
+    datiApp.quantitaTotale = nuovaQta;
     salvaNelTelefono();
     aggiornaInterfaccia();
 });
