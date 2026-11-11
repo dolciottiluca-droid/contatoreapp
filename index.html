@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
@@ -9,84 +9,94 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="container" id="app-container">
         <h1>📊 Gestore Distribuzione</h1>
-        
-        <!-- SEZIONE INPUT INIZIALI -->
-        <div class="sezione-carico">
-            <div class="input-group">
-                <label>Quantità Iniziale:</label>
-                <input type="number" id="quantita-totale" value="20" min="0">
-            </div>
-            <div class="input-group">
-                <label>Unità (es. kg, L, pezzi):</label>
-                <input type="text" id="unita-misura" value="g" placeholder="g">
-            </div>
-            <div class="input-group">
-                <label id="label-prezzo-unitario">Prezzo al g (€):</label>
-                <input type="number" id="prezzo-unitario" value="7.00" step="0.10" min="0">
-            </div>
+
+        <!-- BARRA DI NAVIGAZIONE SCHEDE -->
+        <div class="tabs-nav">
+            <button class="tab-btn active" id="btn-tab-vendite" onclick="mostraScheda('vendite')">📦 Vendite</button>
+            <button class="tab-btn" id="btn-tab-acquisti" onclick="mostraScheda('acquisti')">🔒 Acquisti Fornitore</button>
         </div>
 
-        <!-- DISPLAY RIMANENZA IN TEMPO REALE -->
-        <div class="display-rimanenza">
-            <h2>Rimasti: <span id="quantita-rimasta">20</span> <span class="label-unita">g</span></h2>
-        </div>
-
-        <!-- LISTA CONSEGNE CLIENTI -->
-        <div class="lista-clienti">
-            <h3>Consegne Clienti</h3>
+        <!-- ========================================== -->
+        <!-- SCHEDA 1: VENDITE E DISTRIBUZIONE          -->
+        <!-- ========================================== -->
+        <div id="scheda-vendite" class="scheda-contenuto active">
             
-            <!-- Cliente 1 -->
-            <div class="cliente-card">
-                <input type="text" id="nome-c1" class="input-nome-cliente" value="Cliente 1" placeholder="Nome cliente">
-                <div class="controlli">
-                    <button onclick="cambiaQuantita('cliente1', -1)">-</button>
-                    <span id="qta-cliente1" class="quantita">0</span> <span class="label-unita">g</span>
-                    <button onclick="cambiaQuantita('cliente1', 1)">+</button>
+            <div class="sezione-carico">
+                <div class="input-group">
+                    <label>Quantità Iniziale:</label>
+                    <input type="number" id="quantita-totale" value="20" min="0">
                 </div>
-                <div class="totale-pagare">Totale: <span id="prezzo-cliente1">0.00</span> €</div>
+                <div class="input-group">
+                    <label>Unità (g, kg, L):</label>
+                    <input type="text" id="unita-misura" value="g" placeholder="g">
+                </div>
+                <div class="input-group">
+                    <label id="label-prezzo-unitario">Prezzo al g (€):</label>
+                    <input type="number" id="prezzo-unitario" value="7.00" step="0.10" min="0">
+                </div>
             </div>
 
-            <!-- Cliente 2 -->
-            <div class="cliente-card">
-                <input type="text" id="nome-c2" class="input-nome-cliente" value="Cliente 2" placeholder="Nome cliente">
-                <div class="controlli">
-                    <button onclick="cambiaQuantita('cliente2', -1)">-</button>
-                    <span id="qta-cliente2" class="quantita">0</span> <span class="label-unita">g</span>
-                    <button onclick="cambiaQuantita('cliente2', 1)">+</button>
-                </div>
-                <div class="totale-pagare">Totale: <span id="prezzo-cliente2">0.00</span> €</div>
+            <div class="display-rimanenza">
+                <h2>Rimasti: <span id="quantita-rimasta">20</span> <span class="label-unita">g</span></h2>
             </div>
 
-            <!-- Cliente 3 -->
-            <div class="cliente-card">
-                <input type="text" id="nome-c3" class="input-nome-cliente" value="Cliente 3" placeholder="Nome cliente">
-                <div class="controlli">
-                    <button onclick="cambiaQuantita('cliente3', -1)">-</button>
-                    <span id="qta-cliente3" class="quantita">0</span> <span class="label-unita">g</span>
-                    <button onclick="cambiaQuantita('cliente3', 1)">+</button>
-                </div>
-                <div class="totale-pagare">Totale: <span id="prezzo-cliente3">0.00</span> €</div>
+            <!-- INTESTAZIONE CLIENTI CON TASTO AGGIUNGI -->
+            <div class="header-clienti">
+                <h3>Consegne Clienti</h3>
+                <button class="btn-aggiungi-cliente" onclick="aggiungiCliente()">+ Aggiungi</button>
             </div>
+
+            <!-- CONTENITORE SCORREVOLE (Mostra circa 3 clienti alla volta) -->
+            <div id="lista-clienti-scroll" class="lista-clienti-scroll">
+                <!-- I clienti vengono generati qui dal codice JavaScript -->
+            </div>
+
+            <!-- SEZIONE CONSUMO PERSONALE -->
+            <div class="sezione-personale">
+                <h3>🏠 Consumo Personale</h3>
+                <div class="cliente-card personale">
+                    <span class="nome-cliente">Mio Uso</span>
+                    <div class="controlli">
+                        <button onclick="cambiaPersonale(-1)">-</button>
+                        <span class="qta-box"><span id="qta-personale">0</span> <span class="label-unita">g</span></span>
+                        <button onclick="cambiaPersonale(1)">+</button>
+                    </div>
+                    <div class="tot-badge personale-badge">Uso proprio</div>
+                </div>
+            </div>
+
+            <button id="btn-azzera" onclick="azzeraTutto()">🗑️ Azzera Conteggi Vendite</button>
         </div>
 
-        <!-- SEZIONE CONSUMO PERSONALE -->
-        <div class="sezione-personale">
-            <h3>🏠 Consumo Personale</h3>
-            <div class="cliente-card personale">
-                <span class="nome-cliente">Mio Uso</span>
-                <div class="controlli">
-                    <button onclick="cambiaQuantita('personale', -1)">-</button>
-                    <span id="qta-personale" class="quantita">0</span> <span class="label-unita">g</span>
-                    <button onclick="cambiaQuantita('personale', 1)">+</button>
+        <!-- ========================================== -->
+        <!-- SCHEDA 2: ACQUISTI DAL FORNITORE (PRIVATA) -->
+        <!-- ========================================== -->
+        <div id="scheda-acquisti" class="scheda-contenuto">
+            <h3>📥 Carico dal Fornitore</h3>
+            <p class="sottotitolo-privato">Area riservata al calcolo costi di acquisto.</p>
+
+            <div class="sezione-carico verticale">
+                <div class="input-group">
+                    <label>Quantità Acquistata (<span class="label-unita">g</span>):</label>
+                    <input type="number" id="acq-quantita" value="0" min="0" step="1">
                 </div>
-                <div class="totale-pagare-personale">Uso proprio</div>
+                <div class="input-group">
+                    <label>Prezzo di Acquisto al <span class="label-unita">g</span> (€):</label>
+                    <input type="number" id="acq-prezzo" value="0" min="0" step="0.10">
+                </div>
             </div>
+
+            <div class="display-fornitore">
+                <span>Totale da versare al Fornitore:</span>
+                <h2><span id="acq-totale">0.00</span> €</h2>
+            </div>
+
+            <button id="btn-azzera-acq" onclick="azzeraAcquisti()">🗑️ Azzera Acquisto</button>
         </div>
 
-        <!-- PULSANTE AZZERA TUTTO -->
-        <button id="btn-azzera" onclick="azzeraTutto()">🗑️ Azzera Tutti i Dati</button>
+        <p class="suggerimento-swipe">👈 Scorri lateralmente per cambiare scheda 👉</p>
     </div>
 
     <script src="script.js"></script>
